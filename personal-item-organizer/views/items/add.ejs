@@ -1,0 +1,77 @@
+<h1 class="mb-4"><i class="bi bi-plus-circle"></i> 添加新物品</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form action="/items/add" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">物品名称 <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              value="<%= typeof item !== 'undefined' ? item.name : '' %>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">描述</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              rows="3"
+            ><%= typeof item !== 'undefined' ? item.description : '' %></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">位置</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-control"
+              placeholder="例如：书房柜子第二层"
+              value="<%= typeof item !== 'undefined' ? item.location : '' %>"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="category_id" class="form-label">类别</label>
+            <select id="category_id" name="category_id" class="form-select">
+              <option value="">-- 选择类别 --</option>
+              <% if (categories.length > 0) { %>
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.category_id %>" <%= typeof item !== 'undefined' && item.category_id == category.category_id ? 'selected' : '' %>>
+                    <%= category.category_name %>
+                  </option>
+                <% }); %>
+              <% } %>
+            </select>
+            <div class="form-text">
+              如果没有合适的类别，您可以 <a href="/categories/add">添加新类别</a>
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary me-2">保存物品</button>
+            <a href="/items" class="btn btn-outline-secondary">取消</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title"><i class="bi bi-info-circle"></i> 提示</h4>
+        <ul>
+          <li>物品名称是必填项</li>
+          <li>描述可以添加物品的详细信息</li>
+          <li>位置可以帮助您记住物品存放的地方</li>
+          <li>您可以为物品选择一个类别，也可以创建新类别</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

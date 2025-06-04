@@ -1,0 +1,55 @@
+<h1 class="mb-4"><i class="bi bi-person"></i> 个人资料</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="card-title">修改个人资料</h2>
+        <form action="/users/profile" method="POST">
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-control"
+              value="<%= user.username %>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">邮箱</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              value="<%= user.email %>"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">保存修改</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h3 class="card-title">账号信息</h3>
+        <p><strong>注册时间：</strong> <%= new Date(user.created_at).toLocaleString() %></p>
+        <p><strong>最后更新：</strong> <%= new Date(user.updated_at).toLocaleString() %></p>
+        <hr>
+        <div class="d-grid gap-2">
+          <a href="/users/change-password" class="btn btn-outline-secondary">
+            <i class="bi bi-key"></i> 更改密码
+          </a>
+          <a href="/dashboard" class="btn btn-outline-primary">
+            <i class="bi bi-speedometer2"></i> 返回仪表盘
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

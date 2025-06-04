@@ -1,0 +1,66 @@
+/* 自定义样式 */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* 导航栏样式 */
+.navbar-brand {
+  font-weight: bold;
+}
+
+/* 表格样式 */
+.table thead th {
+  background-color: #f8f9fa;
+}
+
+/* 卡片样式 */
+.card {
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 按钮样式 */
+.btn {
+  border-radius: 0.25rem;
+}
+
+/* 表单样式 */
+.form-control:focus {
+  border-color: #85b7d9;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+/* 辅助样式 */
+.text-truncate {
+  max-width: 150px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .navbar .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .navbar .d-flex {
+    margin-top: 10px;
+  }
+}

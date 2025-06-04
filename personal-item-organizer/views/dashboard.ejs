@@ -1,0 +1,91 @@
+<h1 class="mb-4">仪表盘</h1>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body text-center">
+        <h3 class="card-title text-primary"><i class="bi bi-collection"></i> 物品总数</h3>
+        <p class="display-4"><%= totalItems %></p>
+        <a href="/items" class="btn btn-primary">查看所有物品</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body text-center">
+        <h3 class="card-title text-success"><i class="bi bi-tag"></i> 类别总数</h3>
+        <p class="display-4"><%= totalCategories %></p>
+        <a href="/categories" class="btn btn-success">管理类别</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body text-center">
+        <h3 class="card-title text-info"><i class="bi bi-plus-circle"></i> 添加新物品</h3>
+        <p class="mt-4 mb-4"><i class="bi bi-arrow-down-circle fs-1"></i></p>
+        <a href="/items/add" class="btn btn-info text-white">添加物品</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header">
+        <h3 class="card-title"><i class="bi bi-bar-chart"></i> 物品类别统计</h3>
+      </div>
+      <div class="card-body">
+        <% if (categoryStats.length > 0) { %>
+          <ul class="list-group">
+            <% categoryStats.forEach(category => { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <%= category.name %>
+                <span class="badge bg-primary rounded-pill"><%= category.count %></span>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p class="text-center">暂无类别数据</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="card shadow-sm mb-4">
+      <div class="card-header">
+        <h3 class="card-title"><i class="bi bi-clock-history"></i> 最近添加的物品</h3>
+      </div>
+      <div class="card-body">
+        <% if (recentItems.length > 0) { %>
+          <ul class="list-group">
+            <% recentItems.forEach(item => { %>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h5><%= item.name %></h5>
+                    <% if (item.category_name) { %>
+                      <span class="badge bg-secondary"><%= item.category_name %></span>
+                    <% } %>
+                  </div>
+                  <div>
+                    <a href="/items/edit/<%= item.item_id %>" class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-pencil"></i>
+                    </a>
+                  </div>
+                </div>
+                <% if (item.location) { %>
+                  <small class="text-muted"><i class="bi bi-geo-alt"></i> <%= item.location %></small>
+                <% } %>
+              </li>
+            <% }); %>
+          </ul>
+        <% } else { %>
+          <p class="text-center">暂无物品数据</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>

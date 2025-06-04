@@ -1,0 +1,82 @@
+<h1 class="mb-4"><i class="bi bi-pencil"></i> 编辑物品</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form action="/items/edit/<%= item.item_id %>?_method=PUT" method="POST">
+          <div class="mb-3">
+            <label for="name" class="form-label">物品名称 <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              value="<%= item.name %>"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">描述</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              rows="3"
+            ><%= item.description || '' %></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">位置</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              class="form-control"
+              placeholder="例如：书房柜子第二层"
+              value="<%= item.location || '' %>"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="category_id" class="form-label">类别</label>
+            <select id="category_id" name="category_id" class="form-select">
+              <option value="">-- 选择类别 --</option>
+              <% if (categories.length > 0) { %>
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.category_id %>" <%= item.category_id == category.category_id ? 'selected' : '' %>>
+                    <%= category.category_name %>
+                  </option>
+                <% }); %>
+              <% } %>
+            </select>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary me-2">保存修改</button>
+            <a href="/items" class="btn btn-outline-secondary">取消</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title"><i class="bi bi-info-circle"></i> 物品信息</h4>
+        <p><strong>创建时间：</strong> <%= new Date(item.created_at).toLocaleString() %></p>
+        <p><strong>最后更新：</strong> <%= new Date(item.updated_at).toLocaleString() %></p>
+      </div>
+    </div>
+    
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title text-danger"><i class="bi bi-trash"></i> 删除物品</h4>
+        <p>此操作不可恢复，请谨慎操作。</p>
+        <form action="/items/delete/<%= item.item_id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger w-100" onclick="return confirm('确定要删除此物品吗？')">
+            删除此物品
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<h1 class="mb-4"><i class="bi bi-pencil"></i> 编辑类别</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form action="/categories/edit/<%= category.category_id %>?_method=PUT" method="POST">
+          <div class="mb-3">
+            <label for="category_name" class="form-label">类别名称 <span class="text-danger">*</span></label>
+            <input
+              type="text"
+              id="category_name"
+              name="category_name"
+              class="form-control"
+              value="<%= category.category_name %>"
+              required
+            />
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary me-2">保存修改</button>
+            <a href="/categories" class="btn btn-outline-secondary">取消</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h4 class="card-title"><i class="bi bi-info-circle"></i> 类别信息</h4>
+        <p><strong>创建时间：</strong> <%= new Date(category.created_at).toLocaleString() %></p>
+        <p><strong>最后更新：</strong> <%= new Date(category.updated_at).toLocaleString() %></p>
+        <hr>
+        <a href="/items/category/<%= category.category_id %>" class="btn btn-outline-primary w-100">
+          <i class="bi bi-collection"></i> 查看此类别的物品
+        </a>
+      </div>
+    </div>
+    
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title text-danger"><i class="bi bi-trash"></i> 删除类别</h4>
+        <p>如果该类别下有物品，将无法删除。您需要先修改或删除相关物品。</p>
+        <form action="/categories/delete/<%= category.category_id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger w-100" onclick="return confirm('确定要删除此类别吗？如果该类别下有物品，将无法删除。')">
+            删除此类别
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
